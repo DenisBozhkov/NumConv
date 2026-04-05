@@ -10,7 +10,6 @@ public:
 	Decimal(std::string integer,std::string decimal);
 	
 	std::string change_base(std::string digs);
-	std::string change_base(int base,bool cap=false);
 	
 	void set_precision(int precision);
 	
@@ -19,7 +18,6 @@ public:
 private:
 	BigInt integer,decimal;
 	int precision;
-	std::string change_base(int base,std::string digs);
 };
 
 #endif

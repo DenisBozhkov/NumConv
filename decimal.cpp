@@ -8,21 +8,9 @@ Decimal::Decimal(std::string integer,std::string decimal)
 	
 std::string Decimal::change_base(std::string digs)
 {
-	return change_base(digs.size(),digs);
-}
-
-std::string Decimal::change_base(int base,bool cap)
-{
-	std::string digs;
-	if(cap)digs="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	else digs="0123456789abcdefghijklmnopqrstuvwxyz";
-	return change_base(base,digs);
-}
-	
-std::string Decimal::change_base(int base,std::string digs)
-{
 	std::string s_int="",s_dec="";
 	BigInt c_int=integer,c_dec=decimal;
+	int base=digs.size();
 	while(c_int!=0)
 	{
 		s_int=digs[c_int%base]+s_int;
