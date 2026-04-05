@@ -29,4 +29,4 @@ The application would not convert the text if:
 
 The application would message a warning but will convert the text if:
 * there are multiple specifications of ```-i```, ```-o``` or ```-p``` options. In that case the last specified value for each option would be used.
-* there are more than one specifications of ```-b```, ```-B``` or ```-d``` options. In that case the last specified value for any of the option determines the base and digits of the numeral system.
+* there are more than one specifications of ```-b```, ```-B``` and ```-d``` options. In that case the last specified value for any of the options determines the base and digits of the numeral system.
