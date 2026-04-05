@@ -1,4 +1,5 @@
 #include "converter.h"
+#include<exception>
 using namespace std;
 int main(int argc, char** argv) 
 {
@@ -9,7 +10,7 @@ int main(int argc, char** argv)
 	Options options=Options::get_options(args,handler);
 	try
 	{
-		Converter converter(options);
+		Converter converter(options,handler);
 		converter.read();
 		converter.convert();
 		if(!options.has_output_file())
@@ -18,7 +19,7 @@ int main(int argc, char** argv)
 			cout<<"--------------------------------\n";
 		options.print_success_message();
 	}
-	catch(exception e)
+	catch(exception &e)
 	{
 		handler.error(e.what());
 	}

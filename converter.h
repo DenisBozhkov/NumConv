@@ -10,7 +10,7 @@
 class Converter
 {
 public:
-	Converter(Options &options);
+	Converter(Options &options,MessageHandler &handler);
 	
 	void read();
 	void convert();
@@ -20,6 +20,8 @@ public:
 private:
 	std::string input,output,digits;
 	int precision;
+	
+	MessageHandler handler;
 	
 	struct Match
 	{

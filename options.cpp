@@ -55,7 +55,7 @@ void Options::print_success_message()
 	if(has_input_file())
 		std::cout<<"in file \""<<input_file<<"\" ";
 	else std::cout<<"on the console ";
-	std::cout<<"successfully converted to base "<<get_base()<<" with digit system \""<<get_digits()<<"\".\n";
+	std::cout<<"successfully converted to base "<<get_base()<<" with digit set \""<<get_digits()<<"\".\n";
 	std::cout<<"The result was written ";
 	if(has_output_file())
 		std::cout<<"in file \""<<output_file<<"\".";
@@ -105,10 +105,10 @@ Options Options::get_options(std::vector<std::string> program_options,MessageHan
 				handler.param_error("Expeced number after parameter "+opt);
 			int base=atoi(it->c_str());
 			if(base<2||base>36)
-				handler.param_error("Numbering system base must be between 2 and 36");
+				handler.param_error("Numeral system base must be between 2 and 36");
 			std::string digs=get_digs(base,opt=="-B");
 			if(digits.size()>0)
-				handler.warning("Reset numbering system base from base "+std::to_string(digits.size())+" with digits \""+digits
+				handler.warning("Reset numeral system base from base "+std::to_string(digits.size())+" with digits \""+digits
 								+"\" to base "+std::to_string(base)+" with digits \""+digs+"\" (specified both -b, -B or -d options)");
 			digits=digs;
 		}
@@ -117,8 +117,10 @@ Options Options::get_options(std::vector<std::string> program_options,MessageHan
 			it++;
 			if(it==program_options.end())
 				handler.param_error("Expeced string after parameter -d");
+			if(it->size()<2)
+				handler.param_error("The base of the numeral system must be bigger than 1");
 			if(digits.size()>0)
-				handler.warning("Reset numbering system base from base "+std::to_string(digits.size())+" with digits \""+digits
+				handler.warning("Reset numeral system base from base "+std::to_string(digits.size())+" with digits \""+digits
 								+"\" to base "+std::to_string(it->size())+" with digits \""+(*it)+"\" (specified both -b, -B or -d options)");
 			digits=*it;
 		}

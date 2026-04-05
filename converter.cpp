@@ -1,7 +1,8 @@
 #include "converter.h"
 #include<fstream>
 
-Converter::Converter(Options &options)
+Converter::Converter(Options &options,MessageHandler &handler)
+	:handler(handler)
 {
 	input=options.get_input_file();
 	output=options.get_output_file();
@@ -17,6 +18,8 @@ void Converter::read()
 	if(input.size()!=0)
 	{
 		fin.open(input);
+		if(!fin.is_open())
+			handler.error("Failed reading file \""+input+"\"");
 		std::cin.rdbuf(fin.rdbuf());
 	}
 	
@@ -31,7 +34,8 @@ void Converter::read()
 		std::cin.rdbuf(buf);
 		fin.close();
 	}
-	res.pop_back();
+	if(res.size()>0)
+		res.pop_back();
 	text=res;
 }
 
@@ -51,6 +55,8 @@ void Converter::convert()
     else
     {
     	std::ofstream fout(output);
+		if(!fout.is_open())
+			handler.error("Failed writing to file \""+output+"\"");
     	fout<<text;
     	fout.close();
 	}
